@@ -1,0 +1,43 @@
+ssh debian@192.167.[K[K8.7.2
+debian@192.168.7.2's password: 
+Linux jmwu-beagle 4.9.78-ti-r94 #1 SMP PREEMPT Fri Jan 26 21:26:24 UTC 2018 armv7l
+
+
+  _    _ _        _ _         __  __ _             
+ | |  | (_)      | (_)       |  \/  (_)            
+ | |__| |_       | |_  __ _  | \  / |_ _ __   __ _ 
+ |  __  | |  _   | | |/ _` | | |\/| | | '_ \ / _` |
+ | |  | | | | |__| | | (_| | | |  | | | | | | (_| |
+ |_|  |_|_|  \____/|_|\__,_| |_|  |_|_|_| |_|\__, |
+                                              __/ |
+                                             |___/ 
+Today is Sunday!
+
+Last login: Tue May  8 06:08:19 2018 from 192.168.7.1
+
+[01;32mdebian@jmwu-beagle[00m:[01;34m~[00m$ cat version
+cat: version: No such file or directory
+[01;32mdebian@jmwu-beagle[00m:[01;34m~[00m$ cd /proc
+[01;32mdebian@jmwu-beagle[00m:[01;34m/proc[00m$ cat version
+Linux version 4.9.78-ti-r94 (root@b2-am57xx-beagle-x15-2gb) (gcc version 6.3.0 20170516 (Debian 6.3.0-18) ) #1 SMP PREEMPT Fri Jan 26 21:26:24 UTC 2018
+[01;32mdebian@jmwu-beagle[00m:[01;34m/proc[00m$ cat uptime
+156.03 65.72
+[01;32mdebian@jmwu-beagle[00m:[01;34m/proc[00m$ cat cpuinfo
+processor	: 0
+model name	: ARMv7 Processor rev 2 (v7l)
+BogoMIPS	: 995.32
+Features	: half thumb fastmult vfp edsp thumbee neon vfpv3 tls vfpd32 
+CPU implementer	: 0x41
+CPU architecture: 7
+CPU variant	: 0x3
+CPU part	: 0xc08
+CPU revision	: 2
+
+Hardware	: Generic AM33XX (Flattened Device Tree)
+Revision	: 0000
+Serial		: 0000000000000000
+[01;32mdebian@jmwu-beagle[00m:[01;34m/proc[00m$ ee xit
+logout
+Connection to 192.168.7.2 closed.
+
+[01;32mkelvin@kelvin-VirtualBox[00m:[01;34m~[00m$ 

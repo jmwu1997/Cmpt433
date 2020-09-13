@@ -1,0 +1,55 @@
+ssh debian@192.168.7.2
+debian@192.168.7.2's password: 
+Linux jmwu-beagle 4.9.78-ti-r94 #1 SMP PREEMPT Fri Jan 26 21:26:24 UTC 2018 armv7l
+
+
+  _    _ _        _ _         __  __ _             
+ | |  | (_)      | (_)       |  \/  (_)            
+ | |__| |_       | |_  __ _  | \  / |_ _ __   __ _ 
+ |  __  | |  _   | | |/ _` | | |\/| | | '_ \ / _` |
+ | |  | | | | |__| | | (_| | | |  | | | | | | (_| |
+ |_|  |_|_|  \____/|_|\__,_| |_|  |_|_|_| |_|\__, |
+                                              __/ |
+                                             |___/ 
+Today is Sunday!
+
+
+Last login: Tue May  8 06:17:52 2018 from 192.168.7.1
+
+Hello embedded world, from Jia Ming!
+ 
+Press the Zen cape's Joystick in the direction of the LED.
+  UP for LED 0 (top)
+  DOWN for LED 3 (bottom)
+  LEFT/RIGHT for exit app.
+Press joystick; current score 0 / 0 
+Correct!
+Press joystick; current score 1 / 1 
+Correct!
+Press joystick; current score 2 / 2 
+Incorrect! :(
+Press joystick; current score 2 / 3 
+Incorrect! :(
+Press joystick; current score 2 / 4 
+Your final score was (2 / 4)
+Thank you for playing!
+[01;32mdebian@jmwu-beagle[00m:[01;34m~[00m$ cl  cd /mnt/remote
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt/remote[00m$ ls
+[0m[01;32mmountNFS.sh[0m
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt/remote[00m$ ./mountNFS.sh
+sudo: unable to resolve host jmwu-beagle: No such file or directory
+[sudo] password for debian: 
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt/remote[00m$ ls
+[0m[01;32mmountNFS.sh[0m
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt/remote[00m$ cd ..
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt[00m$ cd remote
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt/remote[00m$ ls
+issue  [0m[01;32mmountNFS.sh[0m  [34;42mmyApps[0m  nfs_message.txt
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt/remote[00m$ cd M myAPpp   pps
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt/remote/myApps[00m$ ls
+[0m[01;32mhello[0m  hello.c  Makefile
+[01;32mdebian@jmwu-beagle[00m:[01;34m/mnt/remote/myApps[00m$ exit
+logout
+Connection to 192.168.7.2 closed.
+
+[01;32mkelvin@kelvin-VirtualBox[00m:[01;34m~[00m$ 

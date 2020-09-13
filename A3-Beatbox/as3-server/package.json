@@ -1,0 +1,16 @@
+{
+  "name": "beatbox_a3",
+  "version": "1.0.0",
+  "description": "assignment 3",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "author": "Levana He",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}

@@ -1,0 +1,277 @@
+oli@oli-VirtualBox:~/cmpt433/public/myApps$ gdb-multiarch -q ./noworky 
+Reading symbols from ./noworky...done.
+(gdb) target remote 192.168.1.74:2001
+Remote debugging using 192.168.1.74:2001
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+warning: File transfers from remote targets can be slow. Use "set sysroot" to access files locally instead.
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+Reading symbols from target:/lib/ld-linux-armhf.so.3...Reading /lib/867309c1cc14ae392683da6c69aa2e46749280.debug from remote target...
+Reading /lib/.debug/867309c1cc14ae392683da6c69aa2e46749280.debug from remote target...
+(no debugging symbols found)...done.
+0xb6fd7980 in ?? () from target:/lib/ld-linux-armhf.so.3
+(gdb) continue
+Continuing.
+Reading /lib/arm-linux-gnueabihf/libc.so.6 from remote target...
+Reading /lib/arm-linux-gnueabihf/ec26854959c82cdd49ebbddfcff38ff8ee64ba.debug from remote target...
+Reading /lib/arm-linux-gnueabihf/.debug/ec26854959c82cdd49ebbddfcff38ff8ee64ba.debug from remote target...
+
+Program received signal SIGSEGV, Segmentation fault.
+0x004006b4 in swapContent (d1=0x410ff8, d2=0x411050) at noworky.c:19
+19		*d1 = tmp;
+(gdb) where
+#0  0x004006b4 in swapContent (d1=0x410ff8, d2=0x411050) at noworky.c:19
+#1  0x004006f0 in tradeArrays (array1=0x4129e8, array2=0x412a40, size=10) at noworky.c:29
+#2  0x004007fc in main () at noworky.c:72
+(gdb) up
+#1  0x004006f0 in tradeArrays (array1=0x4129e8, array2=0x412a40, size=10) at noworky.c:29
+29			swapContent(array1+i, array2+i);
+(gdb) list
+24	 */
+25	void tradeArrays(double *array1, double *array2, int size)
+26	{
+27		unsigned int i;
+28		for (i = size-1; i >= 0; i--) {
+29			swapContent(array1+i, array2+i);
+30		}
+31	}
+32	
+33	/*
+(gdb) args
+Undefined command: "args".  Try "help".
+(gdb) info args
+array1 = 0x4129e8
+array2 = 0x412a40
+size = 10
+(gdb) x/48 0x4129e8
+0x4129e8:	0	0	0	0
+0x4129f8:	0	0	0	0
+0x412a08:	0	0	0	0
+0x412a18:	0	0	0	0
+0x412a28:	0	0	0	0
+0x412a38:	0	89	0	0
+0x412a48:	0	1073741824	0	1074790400
+0x412a58:	0	1075314688	0	1075838976
+0x412a68:	0	1076101120	0	1076363264
+0x412a78:	0	1076625408	0	1076887552
+0x412a88:	0	1077018624	0	132465
+0x412a98:	0	0	0	0
+(gdb) sizeof(array1)
+Undefined command: "sizeof".  Try "help".
+(gdb) x/48 0x412a40
+0x412a40:	0	0	0	1073741824
+0x412a50:	0	1074790400	0	1075314688
+0x412a60:	0	1075838976	0	1076101120
+0x412a70:	0	1076363264	0	1076625408
+0x412a80:	0	1076887552	0	1077018624
+0x412a90:	0	132465	0	0
+0x412aa0:	0	0	0	0
+0x412ab0:	0	0	0	0
+0x412ac0:	0	0	0	0
+0x412ad0:	0	0	0	0
+0x412ae0:	0	0	0	0
+0x412af0:	0	0	0	0
+(gdb) list
+34	 * Display the elements of two arrays.
+35	 */
+36	void displayArrays(double *source, double *target, int size)
+37	{
+38		unsigned int i;
+39	    for (i=0; i < size; i++) {
+40			printf("%3d: %05.1f --> %05.1f\n", i, source[i], target[i]);
+41		}
+42	}
+43	
+(gdb) bt
+#0  0x004006b4 in swapContent (d1=0x410ff8, d2=0x411050) at noworky.c:19
+#1  0x004006f0 in tradeArrays (array1=0x4129e8, array2=0x412a40, size=10) at noworky.c:29
+#2  0x004007fc in main () at noworky.c:72
+(gdb) up
+#2  0x004007fc in main () at noworky.c:72
+72		tradeArrays(source, target, NUM_ELEMENTS);
+(gdb) list
+67		// Display them
+68		printf("Initial values: \n");
+69		displayArrays(source, target, NUM_ELEMENTS);
+70	
+71		// Swap their contents
+72		tradeArrays(source, target, NUM_ELEMENTS);
+73	
+74		// Display them
+75		printf("Final values: \n");
+76		displayArrays(source, target, NUM_ELEMENTS);
+(gdb) down
+#1  0x004006f0 in tradeArrays (array1=0x4129e8, array2=0x412a40, size=10) at noworky.c:29
+29			swapContent(array1+i, array2+i);
+(gdb) down
+#0  0x004006b4 in swapContent (d1=0x410ff8, d2=0x411050) at noworky.c:19
+19		*d1 = tmp;
+(gdb) ls
+Undefined command: "ls".  Try "help".
+(gdb) list
+14	 */
+15	void swapContent(double *d1, double *d2)
+16	{
+17		double tmp = *d2;
+18		*d2 = *d1;
+19		*d1 = tmp;
+20	}
+21	
+22	/*
+23	 * Swap the contents of the two arrays.
+(gdb) down
+Bottom (innermost) frame selected; you cannot go down.
+(gdb) list
+24	 */
+25	void tradeArrays(double *array1, double *array2, int size)
+26	{
+27		unsigned int i;
+28		for (i = size-1; i >= 0; i--) {
+29			swapContent(array1+i, array2+i);
+30		}
+31	}
+32	
+33	/*
+(gdb) args
+Undefined command: "args".  Try "help".
+(gdb) info args
+d1 = 0x410ff8
+d2 = 0x411050
+(gdb) bt
+#0  0x004006b4 in swapContent (d1=0x410ff8, d2=0x411050) at noworky.c:19
+#1  0x004006f0 in tradeArrays (array1=0x4129e8, array2=0x412a40, size=10) at noworky.c:29
+#2  0x004007fc in main () at noworky.c:72
+(gdb) b 25
+Breakpoint 1 at 0x4006d4: file noworky.c, line 28.
+(gdb) continue
+Continuing.
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
+(gdb) target remote 192.168.1.74:2001
+Remote debugging using 192.168.1.74:2001
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+Reading symbols from target:/lib/ld-linux-armhf.so.3...Reading /lib/867309c1cc14ae392683da6c69aa2e46749280.debug from remote target...
+Reading /lib/.debug/867309c1cc14ae392683da6c69aa2e46749280.debug from remote target...
+(no debugging symbols found)...done.
+
+Program received signal SIGTRAP, Trace/breakpoint trap.
+0xb6fd7980 in ?? () from target:/lib/ld-linux-armhf.so.3
+(gdb) continue
+Continuing.
+Reading /lib/arm-linux-gnueabihf/libc.so.6 from remote target...
+Reading /lib/arm-linux-gnueabihf/ec26854959c82cdd49ebbddfcff38ff8ee64ba.debug from remote target...
+Reading /lib/arm-linux-gnueabihf/.debug/ec26854959c82cdd49ebbddfcff38ff8ee64ba.debug from remote target...
+
+Breakpoint 1, tradeArrays (array1=0x4129e8, array2=0x412a40, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) n
+29			swapContent(array1+i, array2+i);
+(gdb) info args
+array1 = 0x4129e8
+array2 = 0x412a40
+size = 10
+(gdb) x/24 array1 + i
+0x412a30:	0	1077018624	0	89
+0x412a40:	0	0	0	1076101120
+0x412a50:	0	1077149696	0	1077805056
+0x412a60:	0	1078198272	0	1078525952
+0x412a70:	0	1078853632	0	1079083008
+0x412a80:	0	1079246848	0	1079410688
+(gdb) array1 + i
+Undefined command: "array1".  Try "help".
+(gdb) print array1 + i
+$1 = (double *) 0x412a30
+(gdb) x/24 array2 + i
+0x412a88:	0	1079410688	0	132465
+0x412a98:	0	0	0	0
+0x412aa8:	0	0	0	0
+0x412ab8:	0	0	0	0
+0x412ac8:	0	0	0	0
+0x412ad8:	0	0	0	0
+(gdb) print *(array1 + i)
+$2 = 18
+(gdb) print *(array2 + i)
+$3 = 90
+(gdb) n
+28		for (i = size-1; i >= 0; i--) {
+(gdb) n
+29			swapContent(array1+i, array2+i);
+(gdb) n
+28		for (i = size-1; i >= 0; i--) {
+(gdb) n
+29			swapContent(array1+i, array2+i);
+(gdb) n
+28		for (i = size-1; i >= 0; i--) {
+(gdb) n
+29			swapContent(array1+i, array2+i);
+(gdb) n
+28		for (i = size-1; i >= 0; i--) {
+(gdb) n
+29			swapContent(array1+i, array2+i);
+(gdb) n
+28		for (i = size-1; i >= 0; i--) {
+(gdb) n
+29			swapContent(array1+i, array2+i);
+(gdb) info args
+array1 = 0x4129e8
+array2 = 0x412a40
+size = 10
+(gdb) print i
+$4 = 4294967293
+(gdb) pirnt size
+Undefined command: "pirnt".  Try "help".
+(gdb) print size
+$5 = 10
+(gdb) print *(array1 + i)
+$6 = 0
+(gdb) print *(array2 + i)
+$7 = 80
+(gdb) n
+28		for (i = size-1; i >= 0; i--) {
+(gdb) n
+29			swapContent(array1+i, array2+i);
+(gdb) n
+28		for (i = size-1; i >= 0; i--) {
+(gdb) n
+29			swapContent(array1+i, array2+i);
+(gdb) continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x004006b4 in swapContent (d1=0x410ff8, d2=0x411050) at noworky.c:19
+19		*d1 = tmp;
+(gdb) list
+14	 */
+15	void swapContent(double *d1, double *d2)
+16	{
+17		double tmp = *d2;
+18		*d2 = *d1;
+19		*d1 = tmp;
+20	}
+21	
+22	/*
+23	 * Swap the contents of the two arrays.
+(gdb) x/24 tmp
+0x3c:	Cannot access memory at address 0x3c
+(gdb) x/24 d1
+0x410ff8:	4196528	0	4	1079083008
+0x411008 <called.8201>:	0	1079246848	0	1079410688
+0x411018:	0	89	1	0
+0x411028:	4195988	9	5	1077149696
+0x411038:	0	1077805056	1	4195988
+0x411048:	7	6	4196528	0
+(gdb) print tmp
+$8 = 60
+(gdb) x/24 *tmp
+Attempt to take contents of a non-pointer value.
+(gdb) print *d1
+$9 = 2.0733603166108747e-317
+(gdb) continue
+Continuing.
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
+(gdb) 
+The program is not being run.
+(gdb) 
